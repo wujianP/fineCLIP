@@ -1,5 +1,4 @@
 """这个文件用于为pix2pix数据集构造适配negCLIP训练框架的.tsv格式文件"""
-import glob
 import json
 import os
 
