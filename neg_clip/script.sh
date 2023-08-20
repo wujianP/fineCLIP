@@ -1,8 +1,8 @@
 conda activate /discobox/wjpeng/env/openVCLIP
 cd /discobox/wjpeng/code/202306/fineCLIP/neg_clip/src/training_pix2pix
 
-CUDA_VISIBLE_DEVICES=3
 python main.py \
+    --gpus 4 \
     --logs="/discobox/wjpeng/ckp/negCLIP/ablate/lr" \
     --name="lr5e-5_10ep_warm100_bs256_vitb32" \
     --train-data="/discobox/wjpeng/dataset/pix2pix/train_neg_clip.pth" \
