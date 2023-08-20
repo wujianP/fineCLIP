@@ -43,6 +43,11 @@ def parse_args():
         help="Which type of dataset to process."
     )
     parser.add_argument(
+        "--data-root",
+        type=str,
+        default="/discobox/wjpeng/dataset/pix2pix/clip-filtered-dataset"
+    )
+    parser.add_argument(
         "--dataset-resampled",
         default=False,
         action="store_true",

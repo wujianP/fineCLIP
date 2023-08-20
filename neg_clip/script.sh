@@ -3,7 +3,7 @@ cd /discobox/wjpeng/code/202306/fineCLIP/neg_clip/src/training_pix2pix
 
 CUDA_VISIBLE_DEVICES=0 python main.py \
     --train-data="/discobox/wjpeng/dataset/pix2pix/train_neg_clip.pth" \
-    --data_root="/discobox/wjpeng/dataset/pix2pix/clip-filtered-dataset" \
+    --data-root="/discobox/wjpeng/dataset/pix2pix/clip-filtered-dataset" \
     --batch-size=256 \
     --dataset-type="torch" \
     --epochs=5 \
