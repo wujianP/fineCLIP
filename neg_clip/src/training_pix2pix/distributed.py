@@ -104,7 +104,7 @@ def init_distributed_device(args):
         if args.distributed and not args.no_set_device_rank:
             device = 'cuda:%d' % args.local_rank
         else:
-            device = 'cuda:%d' % args.gpus
+            device = 'cuda:%d' % int(args.gpus)
         torch.cuda.set_device(device)
     else:
         device = 'cpu'
