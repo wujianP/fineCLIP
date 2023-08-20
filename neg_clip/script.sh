@@ -1,6 +1,6 @@
 conda activate /discobox/wjpeng/env/openVCLIP
 cd /discobox/wjpeng/code/202306/fineCLIP/neg_clip/src/training_pix2pix
-
+rm -rf /discobox/wjpeng/ckp/negCLIP/test
 CUDA_VISIBLE_DEVICES=0 python main.py \
     --train-data="/discobox/wjpeng/dataset/pix2pix/train_neg_clip.pth" \
     --data-root="/discobox/wjpeng/dataset/pix2pix/clip-filtered-dataset" \
