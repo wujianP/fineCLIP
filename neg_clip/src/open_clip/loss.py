@@ -87,9 +87,6 @@ class ClipLoss(nn.Module):
 
     def forward(self, image_features, text_features, logit_scale):
 
-        from IPython import embed
-        embed()
-
         device = image_features.device
         if self.world_size > 1:
             all_image_features, all_text_features = gather_features(
@@ -120,6 +117,6 @@ class ClipLoss(nn.Module):
 
         total_loss = (
             F.cross_entropy(logits_per_image, labels) +
-            F.cross_entropy(logits_per_text[:len(logits_per_image)], labels)
+            F.cross_entropy(logits_per_text, labels)
             ) / 2
         return total_loss

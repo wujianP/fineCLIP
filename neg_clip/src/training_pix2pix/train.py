@@ -183,25 +183,34 @@ def evaluate(model, data, epoch, args, tb_writer=None):
         all_image_features, all_text_features = [], []
         with torch.no_grad():
             for i, batch in enumerate(dataloader):
-                images, hard_images, texts, texts_hard_images, hard_captions, hard_captions_of_hard_images = batch
 
+                images, texts, hard_images, hard_texts = batch
                 images = images.to(device=device, non_blocking=True)
-                hard_images = hard_images.to(device=device, non_blocking=True)
-
                 texts = texts.to(device=device, non_blocking=True)
-                texts_hard_images = texts_hard_images.to(device=device, non_blocking=True)
+                hard_images = hard_images.to(device=device, non_blocking=True)
+                hard_texts = hard_texts.to(device=device, non_blocking=True)
+                images_all = torch.cat([images, hard_images])
+                texts_all = torch.cat([texts, hard_texts])
 
-                hard_captions = hard_captions.to(device=device, non_blocking=True)
-                hard_captions_of_hard_images = hard_captions_of_hard_images.to(device=device, non_blocking=True)
-
-                images = torch.cat([images, hard_images])
-
-                texts = torch.cat([texts, texts_hard_images])
-                texts = torch.cat([texts, hard_captions])
-                texts = torch.cat([texts, hard_captions_of_hard_images])
+                # images, hard_images, texts, texts_hard_images, hard_captions, hard_captions_of_hard_images = batch
+                #
+                # images = images.to(device=device, non_blocking=True)
+                # hard_images = hard_images.to(device=device, non_blocking=True)
+                #
+                # texts = texts.to(device=device, non_blocking=True)
+                # texts_hard_images = texts_hard_images.to(device=device, non_blocking=True)
+                #
+                # hard_captions = hard_captions.to(device=device, non_blocking=True)
+                # hard_captions_of_hard_images = hard_captions_of_hard_images.to(device=device, non_blocking=True)
+                #
+                # images = torch.cat([images, hard_images])
+                #
+                # texts = torch.cat([texts, texts_hard_images])
+                # texts = torch.cat([texts, hard_captions])
+                # texts = torch.cat([texts, hard_captions_of_hard_images])
 
                 with autocast():
-                    image_features, text_features, logit_scale = model(images, texts)
+                    image_features, text_features, logit_scale = model(images_all, texts_all)
                     # features are accumulated in CPU tensors, otherwise GPU memory exhausted quickly
                     # however, system RAM is easily exceeded and compute time becomes problematic
 
@@ -210,13 +219,13 @@ def evaluate(model, data, epoch, args, tb_writer=None):
                     logits_per_text = logits_per_image.t()
                     
                     all_image_features.append(image_features.cpu())
-                    all_text_features.append(text_features[:len(logits_per_image)].cpu())
+                    all_text_features.append(text_features.cpu())
 
                     batch_size = images.shape[0]
                     labels = torch.arange(batch_size, device=device).long()
                     total_loss = (
                         F.cross_entropy(logits_per_image, labels) +
-                        F.cross_entropy(logits_per_text[:len(logits_per_image)], labels)
+                        F.cross_entropy(logits_per_text, labels)
                     ) / 2
 
                 cumulative_loss += total_loss * batch_size
@@ -266,7 +275,7 @@ def get_metrics(image_features, text_features, logit_scale):
     logits_per_image = (logit_scale * image_features @ text_features.t()).detach().cpu()
     logits_per_text = logits_per_image.t().detach().cpu()
 
-    logits = {"image_to_text": logits_per_image, "text_to_image": logits_per_text[:len(logits_per_image)]}
+    logits = {"image_to_text": logits_per_image, "text_to_image": logits_per_text}
     ground_truth = torch.arange(len(text_features)).view(-1, 1)
 
     for name, logit in logits.items():
