@@ -221,10 +221,9 @@ def evaluate(model, data, epoch, args, tb_writer=None):
                     all_image_features.append(image_features.cpu())
                     all_text_features.append(text_features.cpu())
 
-                    batch_size = images.shape[0]
+                    batch_size = images_all.shape[0]
                     labels = torch.arange(batch_size, device=device).long()
-                    from IPython import embed
-                    embed()
+
                     total_loss = (
                         F.cross_entropy(logits_per_image, labels) +
                         F.cross_entropy(logits_per_text, labels)
