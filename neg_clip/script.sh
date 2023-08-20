@@ -4,7 +4,7 @@ cd /discobox/wjpeng/code/202306/fineCLIP/neg_clip/src/training_pix2pix
 CUDA_VISIBLE_DEVICES=0 python main.py \
     --train-data="/discobox/wjpeng/dataset/pix2pix/train_neg_clip.pth" \
     --data-root="/discobox/wjpeng/dataset/pix2pix/clip-filtered-dataset" \
-    --batch-size=256 \
+    --batch-size=128 \
     --dataset-type="torch" \
     --epochs=5 \
     --name="negclip_test" \
