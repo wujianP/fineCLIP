@@ -34,7 +34,5 @@ if __name__ == '__main__':
                 'hard_images': sorted(hard_images)
             }
             data_list.append(data)
-            from IPython import embed
-            embed()
 
     torch.save(data_list, out_path)
