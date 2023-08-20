@@ -24,12 +24,12 @@ except ImportError:
     hvd = None
 
 from open_clip import create_model_and_transforms, trace_model
-from .data import get_data
-from .distributed import is_master, init_distributed_device, world_info_from_env
-from .logger import setup_logging
-from .params import parse_args
-from .scheduler import cosine_lr
-from .train import train_one_epoch, evaluate
+from data import get_data
+from distributed import is_master, init_distributed_device, world_info_from_env
+from logger import setup_logging
+from params import parse_args
+from scheduler import cosine_lr
+from train import train_one_epoch, evaluate
 
 
 def random_seed(seed=42, rank=0):
