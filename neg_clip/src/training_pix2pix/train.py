@@ -84,6 +84,8 @@ def train_one_epoch(model, data, epoch, optimizer, scaler, scheduler, args, tb_w
 
         with autocast():
             image_features, text_features, logit_scale = model(images_all, texts_all)
+            from IPython import embed
+            embed()
             total_loss = loss(image_features, text_features, logit_scale)
 
         if scaler is not None:
