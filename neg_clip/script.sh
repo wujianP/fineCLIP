@@ -4,9 +4,9 @@ rm -rf /discobox/wjpeng/ckp/negCLIP/test
 CUDA_VISIBLE_DEVICES=0 python main.py \
     --train-data="/discobox/wjpeng/dataset/pix2pix/train_neg_clip.pth" \
     --data-root="/discobox/wjpeng/dataset/pix2pix/clip-filtered-dataset" \
-    --batch-size=128 \
+    --batch-size=256 \
     --dataset-type="torch" \
-    --epochs=5 \
+    --epochs=10 \
     --name="negclip_test" \
     --lr=1e-6 \
     --val-data="/discobox/wjpeng/dataset/pix2pix/val_neg_clip.pth"  \
