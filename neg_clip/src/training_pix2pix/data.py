@@ -64,7 +64,7 @@ class CsvDataset(Dataset):
 
 
 class TorchDataset(Dataset):
-    def __init__(self, input_filename, transforms):
+    def __init__(self, input_filename, transforms, data_root):
         """
         data = {
                 'filename': filename,
@@ -78,6 +78,7 @@ class TorchDataset(Dataset):
 
         self.data_list = torch.load(input_filename)
         self.transforms = transforms
+        self.data_root = data_root
 
         logging.debug('Done loading data.')
 
@@ -88,9 +89,9 @@ class TorchDataset(Dataset):
         data = self.data_list[idx]
 
         img_chosen_idx = random.choice(range(len(data['images'])))
-        image = self.transforms(Image.open(data['images'][img_chosen_idx]))
+        image = self.transforms(Image.open(os.path.join(self.data_root, data['images'][img_chosen_idx])))
         text = tokenize([data['text']])[0]
-        hard_image = self.transforms(Image.open(data['hard_images'][img_chosen_idx]))
+        hard_image = self.transforms(Image.open(os.path.join(self.data_root, data['hard_images'][img_chosen_idx])))
         hard_text = tokenize([data['hard_text']])[0]
 
         return image, text, hard_image, hard_text
@@ -473,7 +474,9 @@ def get_torch_dataset(args, preprocess_fn, is_train, epoch=0):
     assert input_filename
     dataset = TorchDataset(
         input_filename,
-        preprocess_fn)
+        preprocess_fn,
+        args.data_root,
+    )
     num_samples = len(dataset)
     sampler = DistributedSampler(dataset) if args.distributed and is_train else None
     shuffle = is_train and sampler is None
