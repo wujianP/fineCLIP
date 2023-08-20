@@ -2,6 +2,7 @@ import json
 import logging
 import math
 import os
+import sys
 import time
 from contextlib import suppress
 
@@ -14,7 +15,14 @@ try:
 except ImportError:
     wandb = None
 
-from ..open_clip import ClipLoss
+
+# 获取父目录的路径
+parent_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(parent_dir)
+# 将父目录添加到sys.path，使得Python能够搜索该目录
+sys.path.append(parent_dir)
+import ClipLoss
+# from ..open_clip import ClipLoss
 from distributed import is_master
 from zero_shot import zero_shot_eval
 
