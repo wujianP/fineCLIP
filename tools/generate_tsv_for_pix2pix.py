@@ -30,8 +30,8 @@ if __name__ == '__main__':
                 'filename': filename,
                 'text': text,
                 'hard_text': hard_text,
-                'images': images,
-                'hard_images': hard_images
+                'images': sorted(images),
+                'hard_images': sorted(hard_images)
             }
             data_list.append(data)
             from IPython import embed
