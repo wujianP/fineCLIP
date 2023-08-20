@@ -15,8 +15,8 @@ except ImportError:
     wandb = None
 
 from open_clip import ClipLoss
-from .distributed import is_master
-from .zero_shot import zero_shot_eval
+from distributed import is_master
+from zero_shot import zero_shot_eval
 
 
 class AverageMeter(object):
