@@ -89,9 +89,12 @@ class TorchDataset(Dataset):
         data = self.data_list[idx]
 
         img_chosen_idx = random.choice(range(len(data['images'])))
-        image = self.transforms(Image.open(os.path.join(self.data_root, data['images'][img_chosen_idx])))
+        image_path = os.path.join(self.data_root, data['filename'], data['images'][img_chosen_idx])
+        hard_image_path = os.path.join(self.data_root, data['filename'], data['hard_images'][img_chosen_idx])
+
+        image = self.transforms(Image.open(image_path))
         text = tokenize([data['text']])[0]
-        hard_image = self.transforms(Image.open(os.path.join(self.data_root, data['hard_images'][img_chosen_idx])))
+        hard_image = self.transforms(Image.open(hard_image_path))
         hard_text = tokenize([data['hard_text']])[0]
 
         return image, text, hard_image, hard_text
