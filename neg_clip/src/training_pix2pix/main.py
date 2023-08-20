@@ -24,14 +24,12 @@ try:
 except ImportError:
     hvd = None
 
-
 # 获取父目录的路径
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(parent_dir)
 # 将父目录添加到sys.path，使得Python能够搜索该目录
 sys.path.append(parent_dir)
-import create_model_and_transforms, trace_model
-# from ..open_clip import create_model_and_transforms, trace_model
+from open_clip import create_model_and_transforms, trace_model
 from data import get_data
 from distributed import is_master, init_distributed_device, world_info_from_env
 from logger import setup_logging
