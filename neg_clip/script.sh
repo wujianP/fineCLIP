@@ -15,5 +15,5 @@ torchrun --nproc_per_node 2 --master_port 29500 -m main \
     --lr=1e-6 \
     --pretrained="openai" \
     --model="ViT-B-32"\
-    --workers 6 \
+    --workers 12 \
     --warmup 100
