@@ -14,19 +14,12 @@ if __name__ == '__main__':
     target_resolution = (args.target_resolution, args.target_resolution)
 
     # 构建target目录结构
-    for root, dirs, files in os.walk(args.source_dir):
-        # 构建目标目录路径
-        target_dir = os.path.join(args.target_dir, os.path.relpath(root, args.source_dir))
-        # 创建目标目录（如果不存在）
-        os.makedirs(target_dir, exist_ok=True)
+    for dirname in os.listdir(args.source_dir):
+        from IPython import embed
+        embed()
 
-    # # 遍历源数据集目录
+    # 遍历源数据集目录
     # for root, dirs, files in os.walk(args.source_dir):
-    #     # 构建目标目录路径
-    #     target_dir = os.path.join(target_dataset_dir, os.path.relpath(root, source_dataset_dir))
-    #
-    #     # 创建目标目录（如果不存在）
-    #     os.makedirs(target_dir, exist_ok=True)
     #
     #     for file in files:
     #         source_file_path = os.path.join(root, file)
