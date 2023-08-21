@@ -1,6 +1,5 @@
 from PIL import Image
 import os
-import shutil
 import argparse
 
 
@@ -14,9 +13,10 @@ if __name__ == '__main__':
     target_resolution = (args.target_resolution, args.target_resolution)
 
     # 构建target目录结构
-    for dirname in os.listdir(args.source_dir):
-        from IPython import embed
-        embed()
+    for dirname in sorted(os.listdir(args.source_dir)):
+        os.makedirs(os.path.join(args.target_dir, dirname), exist_ok=True)
+
+    # for dirname in sorted(os.listdir(args.source_dir)):
 
     # 遍历源数据集目录
     # for root, dirs, files in os.walk(args.source_dir):
