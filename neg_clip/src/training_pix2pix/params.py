@@ -100,6 +100,10 @@ def parse_args():
         help="Where to store tensorboard logs. Use None to avoid storing logs.",
     )
     parser.add_argument(
+        '--log-freq',
+        type=int,
+        default=100)
+    parser.add_argument(
         "--log-local",
         action="store_true",
         default=False,

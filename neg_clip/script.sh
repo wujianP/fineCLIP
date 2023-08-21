@@ -1,6 +1,6 @@
 conda activate /discobox/wjpeng/env/clip
 cd /discobox/wjpeng/code/202306/fineCLIP/neg_clip/src/training_pix2pix
-#rm -rf /discobox/wjpeng/ckp/negCLIP/test
+rm -rf /discobox/wjpeng/ckp/negCLIP/test
 
 torchrun --nproc_per_node 1 --master_port 29501 -m main \
     --gpu_ids="0" \
