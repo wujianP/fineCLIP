@@ -13,7 +13,7 @@ def get_default_params(model_name):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--gpus',
+        '--gpu_ids',
         type=str,
         default='0')
     parser.add_argument(
