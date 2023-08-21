@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../ImbalancedSSL/.idea/ImbalancedSSL.iml" filepath="$PROJECT_DIR$/../../ImbalancedSSL/.idea/ImbalancedSSL.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/fineCLIP.iml" filepath="$PROJECT_DIR$/.idea/fineCLIP.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ngc/.idea/ngc.iml" filepath="$PROJECT_DIR$/../ngc/.idea/ngc.iml" />
     </modules>
