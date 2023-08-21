@@ -146,9 +146,6 @@ def create_model_and_transforms(
         pretrained_image=pretrained_image)
     preprocess_train = image_transform(model.visual.image_size, is_train=True, mean=mean, std=std)
     preprocess_val = image_transform(model.visual.image_size, is_train=False, mean=mean, std=std)
-    from IPython import embed
-    print(model.visual.image_size)
-    embed()
     return model, preprocess_train, preprocess_val
 
 
