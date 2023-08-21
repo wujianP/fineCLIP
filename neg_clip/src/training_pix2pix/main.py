@@ -46,7 +46,6 @@ def random_seed(seed=42, rank=0):
 
 def main():
     args = parse_args()
-    os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_ids
     # sanitize model name for filesystem / uri use, easier if we don't use / in name as a rule?
     args.model = args.model.replace('/', '-')
 
