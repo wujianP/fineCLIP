@@ -499,7 +499,8 @@ def get_torch_dataset(args, preprocess_fn, is_train, epoch=0):
         drop_last=is_train,
     )
     dataloader.num_samples = num_samples
-    dataloader.num_batches = len(dataloader)
+    # dataloader.num_batches = len(dataloader)
+    dataloader.num_batches = math.floor(num_samples / args.batch_size / args.world_size)
 
     return DataInfo(dataloader, sampler)
 

@@ -139,7 +139,7 @@ def train_one_epoch(model, data, epoch, optimizer, scaler, scheduler, args, tb_w
                 f"Loss: {loss_m.val:#.5g} ({loss_m.avg:#.4g}) "
                 f"Data (t): {data_time_m.avg:.3f} "
                 f"Batch (t): {batch_time_m.avg:.3f}, {args.batch_size*args.world_size / batch_time_m.val:#g}/s "
-                f"LR: {optimizer.param_groups[0]['lr']:5f} "
+                f"LR: {optimizer.param_groups[0]['lr']:7f} "
                 f"Logit Scale: {logit_scale_scalar:.3f} - V4"
             )
 
@@ -190,29 +190,16 @@ def evaluate(model, data, epoch, args, tb_writer=None):
             for i, batch in enumerate(dataloader):
 
                 images, texts, hard_images, hard_texts = batch
+
+                texts = tokenize(texts)
+                hard_texts = tokenize(hard_texts)
+
                 images = images.to(device=device, non_blocking=True)
                 texts = texts.to(device=device, non_blocking=True)
                 hard_images = hard_images.to(device=device, non_blocking=True)
                 hard_texts = hard_texts.to(device=device, non_blocking=True)
                 images_all = torch.cat([images, hard_images])
                 texts_all = torch.cat([texts, hard_texts])
-
-                # images, hard_images, texts, texts_hard_images, hard_captions, hard_captions_of_hard_images = batch
-                #
-                # images = images.to(device=device, non_blocking=True)
-                # hard_images = hard_images.to(device=device, non_blocking=True)
-                #
-                # texts = texts.to(device=device, non_blocking=True)
-                # texts_hard_images = texts_hard_images.to(device=device, non_blocking=True)
-                #
-                # hard_captions = hard_captions.to(device=device, non_blocking=True)
-                # hard_captions_of_hard_images = hard_captions_of_hard_images.to(device=device, non_blocking=True)
-                #
-                # images = torch.cat([images, hard_images])
-                #
-                # texts = torch.cat([texts, texts_hard_images])
-                # texts = torch.cat([texts, hard_captions])
-                # texts = torch.cat([texts, hard_captions_of_hard_images])
 
                 with autocast():
                     image_features, text_features, logit_scale = model(images_all, texts_all)
