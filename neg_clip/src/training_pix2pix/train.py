@@ -79,8 +79,8 @@ def train_one_epoch(model, data, epoch, optimizer, scaler, scheduler, args, tb_w
 
         images, texts, hard_images, hard_texts = batch
 
-        from IPython import embed
-        embed()
+        texts = tokenize(texts)
+        hard_texts = tokenize(hard_texts)
 
         images = images.to(device=device, non_blocking=True)
         texts = texts.to(device=device, non_blocking=True)
