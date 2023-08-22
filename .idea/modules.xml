@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/fineCLIP.iml" filepath="$PROJECT_DIR$/.idea/fineCLIP.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../imporvedABC/.idea/imporvedABC.iml" filepath="$PROJECT_DIR$/../../imporvedABC/.idea/imporvedABC.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ngc/.idea/ngc.iml" filepath="$PROJECT_DIR$/../ngc/.idea/ngc.iml" />
     </modules>
   </component>

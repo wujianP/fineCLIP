@@ -64,7 +64,7 @@ class CsvDataset(Dataset):
 
 
 class TorchDataset(Dataset):
-    def __init__(self, input_filename, transforms, data_root):
+    def __init__(self, input_filename, transforms, data_root, tokenized=False):
         """
         data = {
                 'filename': filename,
@@ -79,6 +79,7 @@ class TorchDataset(Dataset):
         self.data_list = torch.load(input_filename)
         self.transforms = transforms
         self.data_root = data_root
+        self.tokenized = tokenized
 
         logging.debug('Done loading data.')
 
@@ -93,10 +94,14 @@ class TorchDataset(Dataset):
         hard_image_path = os.path.join(self.data_root, data['filename'], data['hard_images'][img_chosen_idx])
 
         image = self.transforms(Image.open(image_path))
-        text = tokenize([data['text']])[0]
         hard_image = self.transforms(Image.open(hard_image_path))
-        hard_text = tokenize([data['hard_text']])[0]
 
+        if self.tokenized:
+            text = tokenize([data['text']])[0]
+            hard_text = tokenize([data['hard_text']])[0]
+        else:
+            text = data['text']
+            hard_text = data['hard_text']
         return image, text, hard_image, hard_text
 
 

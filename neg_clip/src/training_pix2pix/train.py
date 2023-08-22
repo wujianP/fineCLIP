@@ -5,6 +5,7 @@ import os
 import sys
 import time
 from contextlib import suppress
+from open_clip import tokenize
 
 import numpy as np
 import torch
@@ -77,6 +78,10 @@ def train_one_epoch(model, data, epoch, optimizer, scaler, scheduler, args, tb_w
         scheduler(step)
 
         images, texts, hard_images, hard_texts = batch
+
+        from IPython import embed
+        embed()
+
         images = images.to(device=device, non_blocking=True)
         texts = texts.to(device=device, non_blocking=True)
         hard_images = hard_images.to(device=device, non_blocking=True)
