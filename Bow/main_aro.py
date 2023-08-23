@@ -54,7 +54,8 @@ def main(args):
     os.makedirs(args.output_dir, exist_ok=True)
     output_file = os.path.join(args.output_dir, f"{args.dataset}.csv")
     df = pd.DataFrame(result_records)
-    print(f"Saving results to {output_file}")
+    macro_acc = df.Accuracy.mean()
+    print(f"Saving results to {output_file}, Macro_acc={macro_acc}")
     if os.path.exists(output_file):
         all_df = pd.read_csv(output_file, index_col=0)
         all_df = pd.concat([all_df, df])
