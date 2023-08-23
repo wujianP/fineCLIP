@@ -4,7 +4,8 @@ import pandas as pd
 
 from torch.utils.data import DataLoader
 
-from model_zoo import get_model
+from model_zoo.clip_models import CLIPWrapper
+from open_clip import create_model_and_transforms
 from dataset_zoo import get_dataset
 from misc import seed_all, _default_collate, save_scores
 
@@ -12,8 +13,8 @@ def config():
     parser = argparse.ArgumentParser()
     parser.add_argument("--device", default="cuda", type=str)
     parser.add_argument("--batch-size", default=32, type=int)
-    parser.add_argument("--num_workers", default=4, type=int)
-    parser.add_argument("--model-name", default="openai-clip:ViT-B/32", type=str)
+    parser.add_argument("--num-workers", default=8, type=int)
+    parser.add_argument("--model-name", default="ViT-B-32", type=str)
     parser.add_argument("--dataset", default="VG_Relation", type=str, choices=["VG_Relation", "VG_Attribution", "COCO_Order", "Flickr30k_Order"])
     parser.add_argument("--seed", default=1, type=int)
     
@@ -26,7 +27,14 @@ def config():
 def main(args):
     seed_all(args.seed)
     
-    model, image_preprocess = get_model(args.model_name, args.device)
+    # model, image_preprocess = get_model(args.model_name, args.device)
+    # Get model
+    model, _, image_preprocess = create_model_and_transforms(
+        model_name=args.model_name,
+        pretrained=args.resume,
+        device="cuda",
+    )
+    model = CLIPWrapper(model, "cuda")
     
     dataset = get_dataset(args.dataset, image_preprocess=image_preprocess, download=args.download)
     
