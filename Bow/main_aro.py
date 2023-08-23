@@ -49,7 +49,8 @@ def main(args):
     
     for record in result_records:
         record.update({"Model": args.model_name, "Dataset": args.dataset, "Seed": args.seed})
-    
+
+    os.makedirs(args.output_dir, exist_ok=True)
     output_file = os.path.join(args.output_dir, f"{args.dataset}.csv")
     df = pd.DataFrame(result_records)
     print(f"Saving results to {output_file}")
