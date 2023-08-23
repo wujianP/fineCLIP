@@ -9,6 +9,7 @@ from open_clip import create_model_and_transforms
 from dataset_zoo import get_dataset
 from misc import seed_all, _default_collate, save_scores
 
+
 def config():
     parser = argparse.ArgumentParser()
     parser.add_argument("--resume", type=str)

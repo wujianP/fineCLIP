@@ -126,8 +126,8 @@ def save_scores(scores, args):
     """
     Utility function to save retrieval scores.
     """
-    si2t_file = os.path.join(args.output_dir, "scores", f"{args.dataset}--{args.text_perturb_fn}--{args.image_perturb_fn}--{args.model_name}--{args.seed}--si2t.pkl")
-    st2i_file = os.path.join(args.output_dir, "scores", f"{args.dataset}--{args.text_perturb_fn}--{args.image_perturb_fn}--{args.model_name}--{args.seed}--st2i.pkl")
+    si2t_file = os.path.join(args.output_dir, "scores", f"{args.dataset}--{args.model_name}--{args.seed}--si2t.pkl")
+    st2i_file = os.path.join(args.output_dir, "scores", f"{args.dataset}--{args.model_name}--{args.seed}--st2i.pkl")
     
     if isinstance(scores, tuple):
         scores_i2t = scores[0]
