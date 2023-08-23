@@ -13,9 +13,18 @@ def get_default_params(model_name):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--gpu_ids',
+        '--'
+    )
+    parser.add_argument(
+        '--gpu-ids',
         type=str,
         default='0')
+    parser.add_argument(
+        '--num-hard-image',
+        type=int,
+        default=1,
+        help='How many hard negative images will be included'
+    )
     parser.add_argument(
         "--train-data",
         type=str,
@@ -102,7 +111,8 @@ def parse_args():
     parser.add_argument(
         '--log-freq',
         type=int,
-        default=100)
+        default=100
+    )
     parser.add_argument(
         "--log-local",
         action="store_true",

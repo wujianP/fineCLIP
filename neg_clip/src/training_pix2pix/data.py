@@ -64,7 +64,7 @@ class CsvDataset(Dataset):
 
 
 class TorchDataset(Dataset):
-    def __init__(self, input_filename, transforms, data_root, tokenized=False):
+    def __init__(self, input_filename, transforms, data_root, num_hard_image):
         """
         data = {
                 'filename': filename,
@@ -79,7 +79,7 @@ class TorchDataset(Dataset):
         self.data_list = torch.load(input_filename)
         self.transforms = transforms
         self.data_root = data_root
-        self.tokenized = tokenized
+        self.num_hard_image = num_hard_image
 
         logging.debug('Done loading data.')
 
@@ -96,12 +96,9 @@ class TorchDataset(Dataset):
         image = self.transforms(Image.open(image_path))
         hard_image = self.transforms(Image.open(hard_image_path))
 
-        if self.tokenized:
-            text = tokenize([data['text']])[0]
-            hard_text = tokenize([data['hard_text']])[0]
-        else:
-            text = data['text']
-            hard_text = data['hard_text']
+        text = data['text']
+        hard_text = data['hard_text']
+
         return image, text, hard_image, hard_text
 
 
@@ -484,6 +481,7 @@ def get_torch_dataset(args, preprocess_fn, is_train, epoch=0):
         input_filename,
         preprocess_fn,
         args.data_root,
+        args.num_hard_image,
     )
     num_samples = len(dataset)
     sampler = DistributedSampler(dataset) if args.distributed and is_train else None
