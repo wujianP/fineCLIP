@@ -11,6 +11,7 @@ from misc import seed_all, _default_collate, save_scores
 
 def config():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--resume", type=str)
     parser.add_argument("--device", default="cuda", type=str)
     parser.add_argument("--batch-size", default=32, type=int)
     parser.add_argument("--num-workers", default=8, type=int)
