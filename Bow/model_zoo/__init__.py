@@ -89,20 +89,6 @@ def get_model(model_name, device, resume, root_dir=CACHE_DIR):
         model = model.eval()
         clip_model = CLIPWrapper(model, device) 
         return clip_model, image_preprocess
-
-    elif 'ours' in model_name:
-        from .clip_models import CLIPWrapper
-        from open_clip import create_model_and_transforms
-        model, _, image_preprocess = create_model_and_transforms(
-            model_name='',
-            pretrained=resume,
-            precision=args.precision,
-            device=device,
-            jit=args.torchscript,
-            force_quick_gelu=args.force_quick_gelu,
-            pretrained_image=args.pretrained_image,
-        )
-    
         
     else:
         raise ValueError(f"Unknown model {model_name}")

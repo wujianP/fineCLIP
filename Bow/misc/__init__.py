@@ -6,7 +6,8 @@ import re
 import os
 import pickle
 import collections
-from torch._six import string_classes
+# from torch._six import string_classes
+string_classes = str
 import PIL
 
 
