@@ -24,3 +24,8 @@ if __name__ == '__main__':
         if img_cnt > max_num:
             max_num = img_cnt
         cnt_dict[dirname] = img_cnt
+
+"""
+min: 2
+max: 8
+"""
