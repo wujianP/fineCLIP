@@ -19,7 +19,8 @@ def main():
     # model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k')
     # tokenizer = open_clip.get_tokenizer('ViT-B-32')
     # model = model.cuda()
-
+    from IPython import embed
+    embed()
     for i in range(len(dataset)):
         image, ipt_image, caption, ipt_caption = dataset[i]
         # image = preprocess(image.resize((512, 512)))
@@ -39,9 +40,6 @@ def main():
         #     # print(img_sim)
         #
         #     image_probs = (100.0 * text_features @ image_features.T).softmax(dim=-1)
-
-        from IPython import embed
-        embed()
 
         run.log({'Find Difference': [wandb.Image(image, caption=caption), wandb.Image(ipt_image, caption=ipt_image)]})
 
