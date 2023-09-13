@@ -26,7 +26,8 @@ def main():
         ipt_image = preprocess(ipt_image.resize((512, 512)))
 
         images = torch.stack([image, ipt_image], dim=0).cuda()
-        text = tokenizer([caption]).cuda()
+        # text = tokenizer([caption]).cuda()
+        text = tokenizer([ipt_caption]).cuda()
 
         with torch.no_grad():
             image_features = model.encode_image(images)
