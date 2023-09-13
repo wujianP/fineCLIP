@@ -29,6 +29,10 @@ def main():
 
         with torch.no_grad():
             image_features = model.encode_image(images)
+
+            img_sim = (image_features[0] * image_features[1].T) * 100
+            print(img_sim)
+
             text_features = model.encode_text(text)
 
             image_features /= image_features.norm(dim=-1, keepdim=True)
