@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a desk with two computer monitors and a chair",
+    "blip-2": "two computers on a desk\n",
+    "original-image-caption-human": "a desk with two computer monitors and a chair",
+    "inpainted-image-caption-human": "a desk with keyboards and a chair"
+}

@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a group of people walking down a busy city street",
+    "blip-2": "clear blue sky with no clouds\n",
+    "original-image-caption-human": "a group of people walking down a busy city street",
+    "inpainted-image-caption-human": "a busy city street with many cars and no pedestrians"
+}

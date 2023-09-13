@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a scooter is parked in the corner of a room",
+    "blip-2": "this is a garage\n",
+    "original-image-caption-human": "a motorcycle is parked in the corner of a room",
+    "inpainted-image-caption-human": "an empty room with only a broom"
+}

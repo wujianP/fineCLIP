@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a desk with a computer monitor, keyboard, mouse and phone",
+    "blip-2": "the desk is made of wood\n",
+    "original-image-caption-human": "a cluttered desk with a computer monitor, keyboard, mouse, telephone and book",
+    "inpainted-image-caption-human": "a cluttered desk with a computer monitor, keyboard, mouse and book"
+}

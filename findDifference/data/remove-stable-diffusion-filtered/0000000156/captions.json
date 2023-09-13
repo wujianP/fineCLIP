@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a man standing in a room with a remote in his hand",
+    "blip-2": "a man standing in front of a door\n",
+    "original-image-caption-human": "a man standing in a room with a window",
+    "inpainted-image-caption-human": "an empty room with a window"
+}

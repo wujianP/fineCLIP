@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a room with several wooden chairs and a blue couch",
+    "blip-2": "the chairs are made of wood\n",
+    "original-image-caption-human": "a room with several wooden chairs, a white table and a blue couch",
+    "inpainted-image-caption-human": "a room with several wooden chairs and a blue couch"
+}

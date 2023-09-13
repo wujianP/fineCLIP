@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a street lined with parked cars and bicycles",
+    "blip-2": "a row of parked cars on the side of the road\n",
+    "original-image-caption-human": "a street lined with parked cars and bicycles, and there are some trees planted on the side",
+    "inpainted-image-caption-human": "a street lined with parked cars and bicycles, and there is no trees planted on the side"
+}

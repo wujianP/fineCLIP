@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a woman sitting on a couch with a little girl",
+    "blip-2": "the woman is sitting on the couch\n",
+    "original-image-caption-human": "a woman sitting on a couch with a little girl and reading a book",
+    "inpainted-image-caption-human": "a woman sitting on a couch reading a book"
+}

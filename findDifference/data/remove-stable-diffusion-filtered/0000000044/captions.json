@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a classroom with tables and chairs and a projector screen",
+    "blip-2": "white board on the wall\n",
+    "original-image-caption-human": "a classroom with tables and chairs and a projector screen",
+    "inpainted-image-caption-human": "a classroom with tables and a white board and a projector screen"
+}

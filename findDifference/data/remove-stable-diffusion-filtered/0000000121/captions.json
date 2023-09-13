@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a guitar sitting next to a shelf full of cd's and dvd's",
+    "blip-2": "the bookshelf is white\n",
+    "original-image-caption-human": "a guitar sitting next to a shelf full of cd's and dvd's",
+    "inpainted-image-caption-human": "a shelf full of cd's and dvd's"
+}

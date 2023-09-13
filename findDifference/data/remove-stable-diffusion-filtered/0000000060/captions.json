@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a row of motorcycles parked on the side of a narrow street",
+    "blip-2": "a row of parked scooters\n",
+    "original-image-caption-human": "a row of motorcycles parked on the side of a narrow street",
+    "inpainted-image-caption-human": "a narrow street with some plants"
+}

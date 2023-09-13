@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a fountain in front of a large building with palm trees around it",
+    "blip-2": "a fountain in front of a building\n",
+    "original-image-caption-human": "a fountain in front of a large building with palm trees and flowers around it",
+    "inpainted-image-caption-human": "a fountain in front of a large building with palm trees around it"
+}

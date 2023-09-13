@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a man sitting at a desk with two computer monitors",
+    "blip-2": "a man sitting at a desk\n",
+    "original-image-caption-human": "a man is sitting on a chair in front of a desk, with a piece of clothing placed on the chair",
+    "inpainted-image-caption-human": "a man is sitting on a chair in front of a desk, and there are two computer monitors on the table"
+}

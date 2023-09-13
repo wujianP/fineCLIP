@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a woman relaxes in a hot tub on a deck",
+    "blip-2": "a woman relaxing in a hot tub on a wooden deck\n",
+    "original-image-caption-human": "a woman on the lounge placed by the side of a circular swimming pool",
+    "inpainted-image-caption-human": "a lounge placed by the side of a circular swimming pool"
+}

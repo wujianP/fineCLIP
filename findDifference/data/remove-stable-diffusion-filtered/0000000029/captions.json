@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "two people standing on a sandy beach next to a boat",
+    "blip-2": "the sky is blue\n",
+    "original-image-caption-human": "two people standing on a sandy beach next to a boat",
+    "inpainted-image-caption-human": "two people standing on a sandy beach next to the sea"
+}

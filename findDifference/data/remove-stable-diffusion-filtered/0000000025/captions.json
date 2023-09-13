@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a group of people walking through a courtyard",
+    "blip-2": "the people are walking on the sidewalk\n",
+    "original-image-caption-human": "a group of people walking through a courtyard, and  some people are sitting on the chairs under the umbrella",
+    "inpainted-image-caption-human": "a group of people walking through a courtyard, and  some people are sitting on the chairs without  umbrella"
+}

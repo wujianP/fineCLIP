@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a group of people walking down a city sidewalk",
+    "blip-2": "people walking on the sidewalk\n",
+    "original-image-caption-human": "a group of people walking down a city sidewalk wearing there bags",
+    "inpainted-image-caption-human": "a group of people walking down a city sidewalk"
+}

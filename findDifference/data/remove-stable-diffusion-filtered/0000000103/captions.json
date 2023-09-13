@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a car is parked on the street in front of a house",
+    "blip-2": "trees on the side of the road\n",
+    "original-image-caption-human": "a car is parked on the street in front of a house and there is a fire hydrant",
+    "inpainted-image-caption-human": "a car is parked on the street in front of a house and there are many trees"
+}

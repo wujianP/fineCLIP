@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a patio with a dining table and chairs",
+    "blip-2": "the table is covered with a floral patterned table cloth\n",
+    "original-image-caption-human": "In the courtyard, there is a dining table and some chairs, surrounded by many trees and flowers",
+    "inpainted-image-caption-human": "In the courtyard, there is a dining table and some chairs, surrounded by many trees"
+}

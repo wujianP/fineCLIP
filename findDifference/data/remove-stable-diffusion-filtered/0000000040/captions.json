@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a living room with a table and chairs in front of a bookshelf",
+    "blip-2": "the table is blue and white\n",
+    "original-image-caption-human": "a living room with a table and chairs in front of a bookshelf, on the table, there is a desk lamp, and some flowers",
+    "inpainted-image-caption-human": "a living room with a table and chairs in front of a bookshelf, on the table, there is a picture frame and some flowers"
+}

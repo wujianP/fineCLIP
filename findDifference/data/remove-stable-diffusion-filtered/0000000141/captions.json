@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "an empty street with buildings on either side of it",
+    "blip-2": "the buildings on the side of the street\n",
+    "original-image-caption-human": "some people walking on the street and buildings on either side of it",
+    "inpainted-image-caption-human": "an empty street with buildings on either side of it"
+}

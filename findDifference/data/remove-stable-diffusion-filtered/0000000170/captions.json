@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a man sitting at a bar in a pub",
+    "blip-2": "a man sitting at a bar\n",
+    "original-image-caption-human": "a man sitting at a bar in a pub",
+    "inpainted-image-caption-human": "a bar in a empty pub"
+}

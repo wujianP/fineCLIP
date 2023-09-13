@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "two people in a workshop working on a piece of furniture",
+    "blip-2": "a man and woman in a workshop working on a piece of furniture\n",
+    "original-image-caption-human": "a woman and a man in a workshop working on a piece of furniture",
+    "inpainted-image-caption-human": "a man in a workshop working on a piece of furniture"
+}

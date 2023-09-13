@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a purple couch sitting next to a table and chairs",
+    "blip-2": "a living room with a couch, a table, and a window\n",
+    "original-image-caption-human": "a purple sofa with a cushion and a teddy bear placed on it, next to it are a table and chairs",
+    "inpainted-image-caption-human": "a purple sofa with a cushion placed on it, next to it are a table and chairs"
+}

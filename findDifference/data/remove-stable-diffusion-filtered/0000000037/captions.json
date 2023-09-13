@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a living room with a couch and a coffee table",
+    "blip-2": "white couch in the living room\n",
+    "original-image-caption-human": "a living room with two couch and a coffee table",
+    "inpainted-image-caption-human": "a living room with a couch and a coffee table"
+}

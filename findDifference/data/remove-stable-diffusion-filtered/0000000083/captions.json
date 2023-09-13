@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a large pile of books on a table in a library",
+    "blip-2": "a table with many books on it\n",
+    "original-image-caption-human": "a large pile of books on a table in a library and some people are sitting in front of computers",
+    "inpainted-image-caption-human": "a large pile of books on a table in a library and some computers in the background"
+}

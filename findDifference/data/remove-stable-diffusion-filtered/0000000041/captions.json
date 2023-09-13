@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a white microwave sitting on top of a counter",
+    "blip-2": "a kitchen counter with a microwave on it\n",
+    "original-image-caption-human": "a white microwave sitting on top of a kitchen  counter",
+    "inpainted-image-caption-human": "miscellaneous items sitting on top of a counter"
+}

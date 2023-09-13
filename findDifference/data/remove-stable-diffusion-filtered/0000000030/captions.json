@@ -1,0 +1,6 @@
+{
+    "instruct-blip": "a tv is sitting on top of a dresser in a room",
+    "blip-2": "a wooden dresser with drawers\n",
+    "original-image-caption-human": "a tv is sitting on the cabinet, and behind it, there is a table and two chairs",
+    "inpainted-image-caption-human": "a cabinet in the room, and behind it, there is a table and two chairs"
+}
