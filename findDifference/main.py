@@ -40,6 +40,9 @@ def main():
         #
         #     image_probs = (100.0 * text_features @ image_features.T).softmax(dim=-1)
 
+        from IPython import embed
+        embed()
+
         run.log({'Find Difference': [wandb.Image(image, caption=caption), wandb.Image(ipt_image, caption=ipt_image)]})
 
 
