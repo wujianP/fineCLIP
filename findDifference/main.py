@@ -40,7 +40,7 @@ def main():
 
             image_probs = (100.0 * text_features @ image_features.T).softmax(dim=-1)
 
-            print(image_probs.item())
+            print(image_probs)
 
 
 if __name__ == '__main__':
