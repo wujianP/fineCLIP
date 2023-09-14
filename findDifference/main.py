@@ -5,8 +5,6 @@ import wandb
 wandb.login()
 
 from dataset import MyDataset
-from PIL import Image
-# from torch.utils.data import DataLoader
 
 
 def main():
