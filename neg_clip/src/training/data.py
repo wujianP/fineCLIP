@@ -46,6 +46,8 @@ class CsvDataset(Dataset):
         return len(self.captions)
 
     def __getitem__(self, idx):
+        from IPython import embed
+        embed()
         path = os.path.join(self.data_root, str(self.images[idx]))
         images = self.transforms(Image.open(path))
         texts = tokenize([str(self.captions[idx])])[0]
