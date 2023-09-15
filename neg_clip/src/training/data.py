@@ -47,7 +47,6 @@ class CsvDataset(Dataset):
 
     def __getitem__(self, idx):
         path = os.path.join(self.data_root, str(self.images[idx]))
-        print(path)
         images = self.transforms(Image.open(path))
         texts = tokenize([str(self.captions[idx])])[0]
 
