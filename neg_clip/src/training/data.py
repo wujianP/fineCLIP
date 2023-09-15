@@ -57,7 +57,7 @@ class PthDataset(Dataset):
 
         new_img_path = os.path.join(self.data_root, random.choice(sample['neg_image_paths']))
         new_images = self.transforms(Image.open(new_img_path))
-        new_captions = self.path2caption[new_img_path]
+        new_captions = self.path2caption[sample['neg_image_paths']]
 
         new_texts = tokenize([new_captions['caption']])[0]
         new_hard = tokenize([random.choice(new_captions['hard_captions'])])[0]
