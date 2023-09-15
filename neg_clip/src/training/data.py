@@ -30,6 +30,41 @@ except ImportError:
 from open_clip import tokenize
 
 
+class PthDataset(Dataset):
+    def __init__(self, data_root, input_filename, transforms, img_key, caption_key, hard_captions_key, sep="\t"):
+        self.data_root = data_root
+        self.data_list = torch.load(input_filename)
+        self.path2caption = {}
+        for sample in self.data_list:
+            path = sample['image_path']
+            self.path2caption[path] = {
+                'caption': sample['caption'],
+                'neg_captions': sample['neg_captions']
+            }
+        self.transforms = transforms
+
+    def __len__(self):
+        return len(self.data_list)
+
+    def __getitem__(self, idx):
+        sample = self.data_list[idx]
+
+        img_path = os.path.join(self.data_root, sample['image_path'])
+        images = self.transforms(Image.open(img_path))
+        texts = tokenize([sample['caption']])[0]
+
+        hard_captions = tokenize([random.choice(sample['neg_captions'])])[0]
+
+        new_img_path = os.path.join(self.data_root, random.choice(sample['neg_image_paths']))
+        new_images = self.transforms(Image.open(new_img_path))
+        new_captions = self.path2caption[new_img_path]
+
+        new_texts = tokenize([new_captions['caption']])[0]
+        new_hard = tokenize([random.choice(new_captions['hard_captions'])])[0]
+
+        return images, new_images, texts, new_texts, hard_captions, new_hard
+
+
 class CsvDataset(Dataset):
     def __init__(self, data_root, input_filename, transforms, img_key, caption_key, hard_captions_key, sep="\t"):
         logging.debug(f'Loading csv data from {input_filename}.')
@@ -438,17 +473,51 @@ def get_csv_dataset(args, preprocess_fn, is_train, epoch=0):
     return DataInfo(dataloader, sampler)
 
 
+def get_pth_dataset(args, preprocess_fn, is_train, epoch=0):
+    input_filename = args.train_data if is_train else args.val_data
+    assert input_filename
+    dataset = PthDataset(
+        args.data_root,
+        input_filename,
+        preprocess_fn,
+        img_key=args.csv_img_key,
+        caption_key=args.csv_caption_key,
+        hard_captions_key=args.csv_hard_captions_key,
+        sep=args.csv_separator)
+    num_samples = len(dataset)
+    sampler = DistributedSampler(dataset) if args.distributed and is_train else None
+    shuffle = is_train and sampler is None
+
+    dataloader = DataLoader(
+        dataset,
+        batch_size=args.batch_size,
+        shuffle=shuffle,
+        num_workers=args.workers,
+        pin_memory=True,
+        sampler=sampler,
+        drop_last=is_train,
+    )
+    dataloader.num_samples = num_samples
+    dataloader.num_batches = len(dataloader)
+
+    return DataInfo(dataloader, sampler)
+
+
 def get_dataset_fn(data_path, dataset_type):
     if dataset_type == "webdataset":
         return get_wds_dataset
     elif dataset_type == "csv":
         return get_csv_dataset
+    elif dataset_type == 'pth':
+        return get_pth_dataset
     elif dataset_type == "auto":
         ext = data_path.split('.')[-1]
         if ext in ['csv', 'tsv']:
             return get_csv_dataset
         elif ext in ['tar']:
             return get_wds_dataset
+        elif ext in ['pth']
+            return get_pth_dataset
         else:
             raise ValueError(
                 f"Tried to figure out dataset type, but failed for extention {ext}.")

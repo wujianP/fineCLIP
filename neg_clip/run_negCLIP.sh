@@ -4,7 +4,7 @@ git pull
 
 CUDA_VISIBLE_DEVICES=0 python -m main \
     --data-root /DDN_ROOT/wjpeng/dataset \
-    --train-data="/discobox/wjpeng/code/202306/fineCLIP/neg_clip/data/train_neg_clip.tsv" \
+    --train-data="/discobox/wjpeng/code/202306/fineCLIP/neg_clip/data/train_neg_clip_fastchat.pth" \
     --val-data="/discobox/wjpeng/code/202306/fineCLIP/neg_clip/data/valid_neg_clip.tsv"  \
     --logs="/DDN_ROOT/wjpeng/ckp/negCLIP/official" \
     --batch-size=128 \
@@ -15,3 +15,6 @@ CUDA_VISIBLE_DEVICES=0 python -m main \
     --model="ViT-B-32"\
     --workers 14 \
     --warmup 50
+
+
+-dataset-type pth
