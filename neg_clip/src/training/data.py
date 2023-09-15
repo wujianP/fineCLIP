@@ -65,7 +65,6 @@ class CsvDataset(Dataset):
         return images, new_images, texts, new_texts, hard_captions, new_hard
 
 
-
 class SharedEpoch:
     def __init__(self, epoch: int = 0):
         self.shared_epoch = Value('i', epoch)
