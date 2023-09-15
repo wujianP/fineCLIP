@@ -46,8 +46,8 @@ class CsvDataset(Dataset):
         return len(self.captions)
 
     def __getitem__(self, idx):
-        path = os.path.join(self.data_root, str(self.images[idx]))
-        images = self.transforms(Image.open(path))
+        img_path = os.path.join(self.data_root, str(self.images[idx]))
+        images = self.transforms(Image.open(img_path))
         texts = tokenize([str(self.captions[idx])])[0]
 
         chosen_caption = random.choice(self.hard_captions[idx])
@@ -55,7 +55,8 @@ class CsvDataset(Dataset):
 
         chose_image_index = random.choice(self.hard_images[idx])
 
-        new_images = self.transforms(Image.open(str(self.images[chose_image_index])))
+        new_img_path = os.path.join(self.data_root, str(self.images[chose_image_index]))
+        new_images = self.transforms(Image.open(new_img_path))
         new_texts = tokenize([str(self.captions[chose_image_index])])[0]
 
         chosen_caption = random.choice(self.hard_captions[chose_image_index])
