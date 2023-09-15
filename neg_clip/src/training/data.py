@@ -516,7 +516,7 @@ def get_dataset_fn(data_path, dataset_type):
             return get_csv_dataset
         elif ext in ['tar']:
             return get_wds_dataset
-        elif ext in ['pth']
+        elif ext in ['pth']:
             return get_pth_dataset
         else:
             raise ValueError(

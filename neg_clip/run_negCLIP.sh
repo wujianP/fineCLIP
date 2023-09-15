@@ -1,10 +1,11 @@
+# >>> OFFICIAL >>>
 conda activate /discobox/wjpeng/env/clip
 cd /discobox/wjpeng/code/202306/fineCLIP/neg_clip/src/training
 git pull
 
 CUDA_VISIBLE_DEVICES=0 python -m main \
     --data-root /DDN_ROOT/wjpeng/dataset \
-    --train-data="/discobox/wjpeng/code/202306/fineCLIP/neg_clip/data/train_neg_clip_fastchat.pth" \
+    --train-data="/discobox/wjpeng/code/202306/fineCLIP/neg_clip/data/train_neg_clip.tsv" \
     --val-data="/discobox/wjpeng/code/202306/fineCLIP/neg_clip/data/valid_neg_clip.tsv"  \
     --logs="/DDN_ROOT/wjpeng/ckp/negCLIP/official" \
     --batch-size=128 \
@@ -16,5 +17,21 @@ CUDA_VISIBLE_DEVICES=0 python -m main \
     --workers 14 \
     --warmup 50
 
+# >>> FASTCHAT >>>
+conda activate /discobox/wjpeng/env/clip
+cd /discobox/wjpeng/code/202306/fineCLIP/neg_clip/src/training
+git pull
 
--dataset-type pth
+CUDA_VISIBLE_DEVICES=1 python -m main \
+    --data-root /DDN_ROOT/wjpeng/dataset \
+    --train-data="/discobox/wjpeng/code/202306/fineCLIP/neg_clip/data/train_neg_clip_fastchat.pth" \
+    --val-data="/discobox/wjpeng/code/202306/fineCLIP/neg_clip/data/valid_neg_clip.tsv"  \
+    --logs="/DDN_ROOT/wjpeng/ckp/negCLIP/mine" \
+    --batch-size=128 \
+    --epochs=5 \
+    --name="negclip_128_1e-6_fastchat" \
+    --lr=1e-6 \
+    --pretrained="openai" \
+    --model="ViT-B-32"\
+    --workers 14 \
+    --warmup 50
