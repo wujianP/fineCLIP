@@ -3,8 +3,8 @@ cd /discobox/wjpeng/code/202306/fineCLIP/neg_clip/src/training
 git pull
 
 CUDA_VISIBLE_DEVICES=0 python -m main \
-    --train-data="data/train_neg_clip.tsv" \
-    --val-data="data/valid_neg_clip.tsv"  \
+    --train-data="../data/train_neg_clip.tsv" \
+    --val-data="../data/valid_neg_clip.tsv"  \
     --logs="/DDN_ROOT/wjpeng/ckp/negCLIP/official" \
     --batch-size=256 \
     --epochs=5 \
