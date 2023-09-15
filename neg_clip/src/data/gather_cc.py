@@ -55,6 +55,7 @@ def grab(line):
         print("Unknown error", e)
         pass
 
+
 if __name__ == "__main__":
     ROOT = "cc_data"
 

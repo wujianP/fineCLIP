@@ -13,6 +13,11 @@ def get_default_params(model_name):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        '--data-root',
+        type=str,
+        default=None
+    )
+    parser.add_argument(
         "--train-data",
         type=str,
         default=None,

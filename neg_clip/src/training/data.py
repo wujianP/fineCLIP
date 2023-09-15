@@ -31,10 +31,10 @@ from open_clip import tokenize
 
 
 class CsvDataset(Dataset):
-    def __init__(self, input_filename, transforms, img_key, caption_key, hard_captions_key, sep="\t"):
+    def __init__(self, data_root, input_filename, transforms, img_key, caption_key, hard_captions_key, sep="\t"):
         logging.debug(f'Loading csv data from {input_filename}.')
         df = pd.read_csv(input_filename, sep=sep, converters={"neg_caption":ast.literal_eval, "neg_image":ast.literal_eval})
-
+        self.data_root = data_root
         self.images = df[img_key].tolist()
         self.captions = df[caption_key].tolist()
         self.hard_captions = df[hard_captions_key].tolist()
@@ -46,7 +46,8 @@ class CsvDataset(Dataset):
         return len(self.captions)
 
     def __getitem__(self, idx):
-        images = self.transforms(Image.open(str(self.images[idx])))
+        path = os.path.join(self.data_root, str(self.images[idx]))
+        images = self.transforms(Image.open(path))
         texts = tokenize([str(self.captions[idx])])[0]
 
         chosen_caption = random.choice(self.hard_captions[idx])
@@ -411,6 +412,7 @@ def get_csv_dataset(args, preprocess_fn, is_train, epoch=0):
     input_filename = args.train_data if is_train else args.val_data
     assert input_filename
     dataset = CsvDataset(
+        args.data_root,
         input_filename,
         preprocess_fn,
         img_key=args.csv_img_key,
