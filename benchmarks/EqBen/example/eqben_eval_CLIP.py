@@ -14,7 +14,7 @@ import eqben.eqben_acc as eqben_acc
 # In this template, we use "USER_MODEL" to represent the VLP model which would be evaluated.
 # Please check other files within the example folder for the specific VLP model.
 import clip
-
+import open_clip
 
 
 ##################### 1. DATA SET PATH ###########################
@@ -60,7 +60,7 @@ class customized_data_toolkit():
 def main(config):
 
     # 3.1. SETUP LOGGER
-    load_file_basename = 'clip_vitb_32'
+    load_file_basename = config.load_file_basename
     eval_results_path = 'EqBen_results/{}'.format(load_file_basename)
     os.makedirs(eval_results_path, exist_ok=True)
 
@@ -71,7 +71,8 @@ def main(config):
 
     # 3.2. DATALOADER/USER_MODEL SETUP
     device = "cuda"
-    model, preprocess = clip.load('ViT-B/32', device)
+    # model, preprocess = clip.load('ViT-B/32', device)
+    model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained=config.resume)
     model = model.to(device).eval()
 
     eval_dataset = DATASET_INFO[config.eval_data]["func"](img_root=DATASET_INFO[config.eval_data]["img_root"], ann_root=DATASET_INFO[config.eval_data]["ann_root"], config=config, customized_data_toolkit=customized_data_toolkit(preprocess))
@@ -165,6 +166,8 @@ if __name__ == '__main__':
     parser.add_argument('--eval_task', default='clip_pretrian')
     parser.add_argument('--batch_size', default=128)
     parser.add_argument('--num_workers', default=14)
+    parser.add_argument('--load_file_basename', default='clip_vitb_32')
+    parser.add_argument('--resume', default='None')
     config = parser.parse_args()
 
     main(config)
