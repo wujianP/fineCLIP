@@ -52,8 +52,6 @@ class customized_data_toolkit():
         image = Image.fromarray(np.load(image)[:, :, [2, 1, 0]], 'RGB')
         return self.transform(image)
 
-
-
 ################ 3. USER_MODEL INFERENCE PROCESS #####################
 # For USER_MODEL, how to forward the data (image/caption) and obtain the image-text simiarity during the inference stage.
 
@@ -79,7 +77,11 @@ def main(config):
     eval_dataset = DATASET_INFO[config.eval_data]["func"](img_root=DATASET_INFO[config.eval_data]["img_root"], ann_root=DATASET_INFO[config.eval_data]["ann_root"], config=config, customized_data_toolkit=customized_data_toolkit(preprocess))
     gpu_cnt = torch.cuda.device_count()
     print('use {} GPUs; '.format(gpu_cnt))
-    eval_dataloader = torch.utils.data.DataLoader(eval_dataset, batch_size=int(gpu_cnt*128), num_workers=14, shuffle=False, collate_fn=eval_dataset.collate)
+    eval_dataloader = torch.utils.data.DataLoader(eval_dataset,
+                                                  batch_size=int(config.batch_size),
+                                                  num_workers=8,
+                                                  shuffle=False,
+                                                  collate_fn=eval_dataset.collate)
     clip_score_c0_i0_all, clip_score_c1_i0_all, clip_score_c0_i1_all, clip_score_c1_i1_all = [], [], [], []
 
     # 3.3. FORWARD PROCESS
@@ -161,6 +163,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--eval_data', default='eqben', choices=['eqben', 'winoground', 'eqben'])
     parser.add_argument('--eval_task', default='clip_pretrian')
+    parser.add_argument('--batch_size', default=128)
     config = parser.parse_args()
 
     main(config)
