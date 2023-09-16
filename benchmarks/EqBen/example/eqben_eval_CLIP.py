@@ -22,14 +22,14 @@ import clip
 
 DATASET_INFO = {
     "eqben": {"func": eqben_utils.EqBenALL,
-              "img_root": '/path/to/eqben/image',
-              "ann_root": '/path/to/eqben/annotation/ann_json_finegrained_random.json'},
+              "img_root": '/DDN_ROOT/wjpeng/dataset/eqben/image',
+              "ann_root": '/DDN_ROOT/wjpeng/dataset/eqben/ann_json_finegrained_random.json'},
     'winoground': {"func": eqben_utils.Winoground,
-                   'img_root':'/path/to/winoground/images',
-                   'ann_root':'/path/to/winoground/examples.jsonl'},
+                   'img_root': '/DDN_ROOT/wjpeng/dataset/winoground/images',
+                   'ann_root': '/DDN_ROOT/wjpeng/dataset/winoground/examples.jsonl'},
     'valse': {"func": eqben_utils.VALSE,
-              'img_root':'/path/to/valse/valse_ann/ours/img',
-              'ann_root':'/path/to/valse/valse_ann/ours/global_ann.json'}
+              'img_root': '/path/to/valse/valse_ann/ours/img',
+              'ann_root': '/path/to/valse/valse_ann/ours/global_ann.json'}
 }
 
 
@@ -48,7 +48,7 @@ class customized_data_toolkit():
         return self.transform(image)
 
     def process_img_npy(self, image):
-        # Define the model-specifc data pre-process (e.g., augmentation) for image numpy file (Youcook2).
+        # Define the model-specific data pre-process (e.g., augmentation) for image numpy file (Youcook2).
         image = Image.fromarray(np.load(image)[:, :, [2, 1, 0]], 'RGB')
         return self.transform(image)
 
@@ -57,10 +57,12 @@ class customized_data_toolkit():
 ################ 3. USER_MODEL INFERENCE PROCESS #####################
 # For USER_MODEL, how to forward the data (image/caption) and obtain the image-text simiarity during the inference stage.
 
+
+@torch.no_grad()
 def main(config):
 
     # 3.1. SETUP LOGGER
-    load_file_basename = 'clip_rn50'
+    load_file_basename = 'clip_vitb_32'
     eval_results_path = 'EqBen_results/{}'.format(load_file_basename)
     os.makedirs(eval_results_path, exist_ok=True)
 
@@ -69,23 +71,18 @@ def main(config):
     logger_txt.info("creating log at: {}".format(logger_path))
     add_log_to_file(logger_path)
 
-
-
     # 3.2. DATALOADER/USER_MODEL SETUP
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    model, preprocess = clip.load('RN50', device)
+    device = "cuda"
+    model, preprocess = clip.load('ViT-B/32', device)
     model = model.to(device).eval()
 
     eval_dataset = DATASET_INFO[config.eval_data]["func"](img_root=DATASET_INFO[config.eval_data]["img_root"], ann_root=DATASET_INFO[config.eval_data]["ann_root"], config=config, customized_data_toolkit=customized_data_toolkit(preprocess))
     gpu_cnt = torch.cuda.device_count()
     print('use {} GPUs; '.format(gpu_cnt))
-    eval_dataloader = torch.utils.data.DataLoader(eval_dataset, batch_size=int(gpu_cnt*128), num_workers=0, shuffle=False, collate_fn=eval_dataset.collate)
+    eval_dataloader = torch.utils.data.DataLoader(eval_dataset, batch_size=int(gpu_cnt*128), num_workers=14, shuffle=False, collate_fn=eval_dataset.collate)
     clip_score_c0_i0_all, clip_score_c1_i0_all, clip_score_c0_i1_all, clip_score_c1_i1_all = [], [], [], []
 
-
-
     # 3.3. FORWARD PROCESS
-
     def clip_forward_batch_singlepair(model, image, caption):
         with torch.no_grad():
             text_encoded = model.encode_text(caption)
@@ -115,7 +112,6 @@ def main(config):
 
             return sim_c0_i0, sim_c1_i0, sim_c0_i1, sim_c1_i1
 
-
     if config.eval_data == "eqben":
         clip_score_all = []
         for idx, (image, caption) in enumerate(tqdm(eval_dataloader)):
@@ -126,7 +122,6 @@ def main(config):
 
         clip_score_all = torch.cat(clip_score_all, dim=0)
         np.save('{}/eqben_scores.npy'.format(eval_results_path), clip_score_all)
-
 
     else:
         for idx, (image0, image1, caption0, caption1) in enumerate(tqdm(eval_dataloader)):
@@ -143,8 +138,7 @@ def main(config):
         clip_score_c1_i0_all = torch.cat(clip_score_c1_i0_all, dim=0)
         clip_score_c0_i1_all = torch.cat(clip_score_c0_i1_all, dim=0)
         clip_score_c1_i1_all = torch.cat(clip_score_c1_i1_all, dim=0)
-        eval_clip_scores_itm = {'raw_info':eval_dataset.sample_pair, "c0_i0": clip_score_c0_i0_all, "c0_i1": clip_score_c0_i1_all, "c1_i0": clip_score_c1_i0_all, "c1_i1": clip_score_c1_i1_all}
-
+        eval_clip_scores_itm = {'raw_info': eval_dataset.sample_pair, "c0_i0": clip_score_c0_i0_all, "c0_i1": clip_score_c0_i1_all, "c1_i0": clip_score_c1_i0_all, "c1_i1": clip_score_c1_i1_all}
 
         ################ 4. CALCULATE/SAVE THE PERFORMANCE #####################
         if 'valse' in config.eval_data:
@@ -165,7 +159,7 @@ def main(config):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--eval_data', default='eqbenag')
+    parser.add_argument('--eval_data', default='eqben', choices=['eqben', 'winoground', 'eqben'])
     parser.add_argument('--eval_task', default='clip_pretrian')
     config = parser.parse_args()
 
