@@ -10,12 +10,13 @@ CUDA_VISIBLE_DEVICES=0 python -m main \
     --logs="/DDN_ROOT/wjpeng/ckp/negCLIP/official" \
     --batch-size=128 \
     --epochs=5 \
-    --name="negclip_128_1e-6" \
-    --lr=1e-6 \
+    --name="negclip_128_5e-7" \
+    --lr=5e-7 \
     --pretrained="openai" \
     --model="ViT-B-32"\
     --workers 14 \
     --warmup 50
+
 
 # >>> FASTCHAT >>>
 conda activate /discobox/wjpeng/env/clip
@@ -29,8 +30,8 @@ CUDA_VISIBLE_DEVICES=1 python -m main \
     --logs="/DDN_ROOT/wjpeng/ckp/negCLIP/mine" \
     --batch-size=128 \
     --epochs=5 \
-    --name="negclip_128_1e-6_fastchat" \
-    --lr=1e-6 \
+    --name="negclip_128_5e-7_fastchat" \
+    --lr=5e-7 \
     --pretrained="openai" \
     --model="ViT-B-32"\
     --workers 14 \
