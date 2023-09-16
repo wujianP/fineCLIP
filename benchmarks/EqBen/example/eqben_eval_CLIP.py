@@ -79,7 +79,7 @@ def main(config):
     print('use {} GPUs; '.format(gpu_cnt))
     eval_dataloader = torch.utils.data.DataLoader(eval_dataset,
                                                   batch_size=int(config.batch_size),
-                                                  num_workers=8,
+                                                  num_workers=int(config.num_workers),
                                                   shuffle=False,
                                                   collate_fn=eval_dataset.collate)
     clip_score_c0_i0_all, clip_score_c1_i0_all, clip_score_c0_i1_all, clip_score_c1_i1_all = [], [], [], []
@@ -164,6 +164,7 @@ if __name__ == '__main__':
     parser.add_argument('--eval_data', default='eqben', choices=['eqben', 'winoground', 'eqben'])
     parser.add_argument('--eval_task', default='clip_pretrian')
     parser.add_argument('--batch_size', default=128)
+    parser.add_argument('--num_workers', default=14)
     config = parser.parse_args()
 
     main(config)
