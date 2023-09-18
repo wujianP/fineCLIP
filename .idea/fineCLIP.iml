@@ -6,5 +6,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ngc" />
     <orderEntry type="module" module-name="board-machine" />
+    <orderEntry type="module" module-name="CountLIP" />
   </component>
 </module>
