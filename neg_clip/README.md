@@ -302,7 +302,7 @@ export MASTER_ADDR=$master_addr
 
 cd /shared/open_clip
 export PYTHONPATH="$PYTHONPATH:$PWD/src"
-srun --cpu_bind=v --accel-bind=gn python -u src/training/main.py \
+srun --cpu_bind=v --accel-bind=gn python -u src/training/google_benchmark.py \
     --save-frequency 1 \
     --report-to tensorboard \
     --train-data="/data/LAION-400M/{00000..41455}.tar" \
