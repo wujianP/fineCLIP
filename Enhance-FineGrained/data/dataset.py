@@ -89,7 +89,6 @@ class CocoDataset(Dataset):
         image = Image.open(os.path.join(self.root, path)).convert('RGB')
         if self.transforms is not None:
             image = self.transforms(image)
-        caption=self.tokenize(caption)
         return image, caption
 
     def __len__(self):
@@ -215,7 +214,7 @@ def get_arg_parser():
     args = parser.parse_args()
     return args
 if __name__=="__main__":
-    print('perfrom data augmentation',flush=True)
+    print('perfrom data augmentation', flush=True)
     args=get_arg_parser() 
     augmentation(args)
     
