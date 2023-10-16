@@ -70,7 +70,6 @@ class VG_Relation(Dataset):
         image_zip_file = os.path.join(self.root_dir, "vgr_vga_images.zip")
         subprocess.call(["gdown", "--no-cookies", "1qaPlrwhGNMrR3a11iopZUT_GPP_LrgP9", "--output", image_zip_file])
         subprocess.call(["unzip", "vgr_vga_images.zip"], cwd=self.root_dir)
-
         
     def evaluate_scores(self, scores):
         """
